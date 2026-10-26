@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#05060A">
+  <meta name="description" content="ZYRAVANTH 2 — Infinite galaxies. Infinite worlds. Infinite identities.">
+  <title>ZYRAVANTH 2 — Infinite Cosmos</title>
+  <link rel="icon" href="./assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="space-backdrop" aria-hidden="true"><div class="nebula nebula-a"></div><div class="nebula nebula-b"></div><canvas id="starfield"></canvas></div>
+  <header class="topbar" id="topbar">
+    <button class="brand" id="brandHome" aria-label="Return to cosmos introduction">
+      <img src="./assets/logo.svg" alt="" width="34" height="34">
+      <span>ZYRAVANTH<span class="brand-mark"> 2</span></span>
+    </button>
+    <div class="header-context" id="headerContext">COSMIC ATLAS</div>
+    <div class="header-actions">
+      <button class="icon-button" id="openSearch" aria-label="Open search" title="Search (/)">⌕</button>
+      <button class="icon-button" id="openSettings" aria-label="Open preferences" title="Preferences">⚙</button>
+    </div>
+  </header>
+
+  <main id="app" tabindex="-1">
+    <section class="intro-screen" id="introScreen">
+      <div class="intro-orbit orbit-one"></div><div class="intro-orbit orbit-two"></div>
+      <div class="intro-copy">
+        <div class="eyebrow"><span class="live-dot"></span> A PROCEDURAL COSMIC ATLAS</div>
+        <h1>ENTER THE<br><span>INFINITE COSMOS</span></h1>
+        <p class="tagline">INFINITE GALAXIES. INFINITE WORLDS. INFINITE IDENTITIES.</p>
+        <p class="intro-description">Travel from galaxy to world to identity. Every destination is generated from its own stable identifier, ready to be rediscovered whenever you return.</p>
+        <button class="primary-button" id="exploreButton">EXPLORE THE UNIVERSE <span aria-hidden="true">↗</span></button>
+        <div class="intro-foot"><span>01 — GALAXIES</span><span>02 — PLANETS</span><span>03 — PROFILES</span></div>
+      </div>
+      <div class="hero-art" aria-hidden="true"><div class="hero-core"></div><div class="hero-ring ring-a"></div><div class="hero-ring ring-b"></div><div class="hero-dust"></div></div>
+      <div class="scroll-cue"><span></span> THE COSMOS CONTINUES</div>
+    </section>
+
+    <section class="explorer hidden" id="explorer">
+      <div class="page-heading">
+        <div class="eyebrow"><span class="live-dot"></span><span id="phaseLabel">COSMIC ATLAS</span></div>
+        <div class="heading-row"><div><h1 id="pageTitle">EXPLORE <span>GALAXIES</span></h1><p id="pageSubtitle">Discover endless galaxies, each containing an unbounded universe of planets.</p></div><div class="cosmos-status"><span class="status-ring"></span><span>INFINITE<br><b>DISCOVERY ACTIVE</b></span></div></div>
+      </div>
+      <nav class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb"></nav>
+      <div class="context-banner hidden" id="contextBanner"></div>
+      <div class="search-area" id="searchArea">
+        <span class="search-symbol" aria-hidden="true">⌕</span>
+        <label class="sr-only" for="searchInput" id="searchLabel">Search galaxies</label>
+        <input id="searchInput" type="search" autocomplete="off" spellcheck="false" placeholder="SEARCH GALAXIES BY NAME OR ID...">
+        <button class="clear-search hidden" id="clearSearch" aria-label="Clear search">×</button>
+        <span class="scope-pill" id="scopePill">GALAXY SEARCH</span>
+      </div>
+      <div class="search-status" id="searchStatus" role="status" aria-live="polite"></div>
+      <div class="list-meta"><span id="listCaption">GENERATED FOR YOUR EXPLORATION</span><span id="sessionCount">0 DISCOVERED THIS SESSION</span></div>
+      <div class="entity-grid" id="entityGrid" aria-live="polite"></div>
+      <div class="infinite-sentinel" id="sentinel"><span class="loader"></span><span id="sentinelText">Preparing the next region of the cosmos…</span></div>
+      <div class="floating-actions"><button id="floatingSearch" class="floating-button" aria-label="Search this universe" title="Search this universe">⌕</button><button id="backToTop" class="floating-button" aria-label="Back to top" title="Back to top">↑</button></div>
+    </section>
+
+    <section class="profile-detail hidden" id="profileDetail" aria-live="polite"></section>
+    <section class="intro-return hidden" id="introReturn"><button class="text-button" id="returnIntro">← Return to introduction</button></section>
+  </main>
+
+  <div class="overlay hidden" id="searchOverlay" role="dialog" aria-modal="true" aria-labelledby="overlayTitle">
+    <div class="overlay-panel search-panel">
+      <div class="overlay-heading"><div><div class="eyebrow">DIRECT COSMIC LOOKUP</div><h2 id="overlayTitle">Find an entity</h2></div><button class="icon-button close-overlay" data-close="searchOverlay" aria-label="Close search">×</button></div>
+      <p class="overlay-note" id="overlayScope">Search scope follows your current exploration phase.</p>
+      <div class="search-area overlay-search"><span class="search-symbol">⌕</span><label class="sr-only" for="overlayInput">Search current entity type</label><input id="overlayInput" type="search" autocomplete="off" spellcheck="false" placeholder="Search by name or exact ID…"><button id="overlayClear" class="clear-search hidden" aria-label="Clear search">×</button></div>
+      <div class="overlay-results" id="overlayResults"></div>
+      <div class="overlay-footer">Exact identifiers resolve directly. Name discovery proceeds incrementally through the generated sequence.</div>
+    </div>
+  </div>
+
+  <div class="overlay hidden" id="settingsOverlay" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+    <div class="overlay-panel settings-panel">
+      <div class="overlay-heading"><div><div class="eyebrow">PERSONALIZE YOUR COSMOS</div><h2 id="settingsTitle">Preferences</h2></div><button class="icon-button close-overlay" data-close="settingsOverlay" aria-label="Close preferences">×</button></div>
+      <label class="setting-row"><span><b>Reduced visual effects</b><small>Lower background and decorative rendering.</small></span><input type="checkbox" id="reducedEffects"></label>
+      <label class="setting-row"><span><b>Reduced motion</b><small>Respect a calmer, less animated interface.</small></span><input type="checkbox" id="reducedMotion"></label>
+      <label class="setting-row"><span><b>Compact cards</b><small>Fit more discoveries on screen.</small></span><input type="checkbox" id="compactCards"></label>
+      <button class="secondary-button" id="resetPreferences">RESTORE DEFAULT PREFERENCES</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="./script.js"></script>
+</body>
+</html>
